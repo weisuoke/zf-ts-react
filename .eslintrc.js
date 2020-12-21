@@ -24,6 +24,7 @@ module.exports = {
     'rules': {
         'quotes': ['error', 'single', { 'allowTemplateLiterals': true }],
         'eol-last': ['error', 'always'],
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
         semi: 'error'
     }
 };
