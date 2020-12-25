@@ -1,21 +1,26 @@
 import * as React from 'react';
 import TodoInput from '@/components/Todos/TodoInput';
 import TodoItem from '@/components/Todos/TodoItem';
-import { Todo } from './types';
+import { Todo } from '@/models';
+import { CombinedState, TodosState } from '@/store/reducers';
+import * as actions from '@/store/actions/todos';
+import { connect } from 'react-redux';
 
 const ulStyle:React.CSSProperties = {
   width: '100px'
 };
 
-export interface Props {
-  title: string
-}
+type StateProps = ReturnType<typeof mapStateToProps>;
+
+type DispatchProps = typeof actions;
+
+type Props = StateProps & DispatchProps;
 
 export interface State {
   todos: Todo[]
 }
 
-export default class Todos extends React.Component<Props, State> {
+class Todos extends React.Component<Props, State> {
   state = {
     todos: new Array<Todo>()
   }
@@ -29,7 +34,6 @@ export default class Todos extends React.Component<Props, State> {
   render() {
     return (
       <div>
-        <h1>{this.props.title}</h1>
         <TodoInput addTodo={this.addTodo}/>
         <ul style={ulStyle}>
           {
@@ -40,3 +44,9 @@ export default class Todos extends React.Component<Props, State> {
     );
   }
 }
+
+const mapStateToProps = function (state: CombinedState): TodosState {
+  return state.todos;
+};
+
+export default connect(mapStateToProps, actions)(Todos);

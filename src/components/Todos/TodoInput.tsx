@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Todo } from './types';
+import { Todo } from '@/models';
 import {withDefaultInputProps,DefaultProps } from '@/utils';
 interface OwnProps {
   addTodo:(todo:Todo)=>void
