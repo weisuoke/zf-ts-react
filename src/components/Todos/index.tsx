@@ -3,6 +3,8 @@ import TodoInput from '@/components/Todos/TodoInput';
 import TodoItem from '@/components/Todos/TodoItem';
 import { Todo } from '@/models';
 import { CombinedState, TodosState } from '@/store/reducers';
+import { RouteComponentProps } from 'react-router-dom';
+import { StaticContext } from 'react-router';
 import * as actions from '@/store/actions/todos';
 import { connect } from 'react-redux';
 
@@ -14,7 +16,11 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 
 type DispatchProps = typeof actions;
 
-type Props = StateProps & DispatchProps;
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface Params {}
+interface LocationState { name:string }
+
+type Props = StateProps & DispatchProps & RouteComponentProps<Params, StaticContext, LocationState>;
 
 export interface State {
   todos: Todo[]
@@ -34,6 +40,7 @@ class Todos extends React.Component<Props, State> {
   render() {
     return (
       <div>
+        <p>名称:{this.props.location.state.name}</p>
         <TodoInput addTodo={this.addTodo}/>
         <ul style={ulStyle}>
           {
