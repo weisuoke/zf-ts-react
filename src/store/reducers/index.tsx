@@ -1,10 +1,13 @@
 import counter, { CounterState } from '@/store/reducers/counter';
 import todos, { TodosState } from '@/store/reducers/todos';
 import { combineReducers } from 'redux';
+import history from '@/history';
+import { connectRouter } from 'connected-react-router';
 
 const reducers = {
   counter,
-  todos
+  todos,
+  router: connectRouter(history)
 };
 
 type ReducersType = typeof reducers;

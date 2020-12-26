@@ -4,12 +4,14 @@ import Counter from '@/components/Counter';
 import Todos from '@/components/Todos';
 import {Provider} from 'react-redux';
 import store from './store';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
+import history from '@/history';
+import {ConnectedRouter} from 'connected-react-router';
 
 const root = document.getElementById('root');
 ReactDOM.render((
   <Provider store={store}>
-    <Router>
+    <ConnectedRouter history={history}>
       <>
         <ul>
           <li><Link to="/counter/counterName">counter</Link></li>
@@ -18,6 +20,6 @@ ReactDOM.render((
         <Route path="/counter/:name" component={Counter}/>
         <Route path="/todos" component={Todos} />
       </>
-    </Router>
+    </ConnectedRouter>
   </Provider>
 ), root);

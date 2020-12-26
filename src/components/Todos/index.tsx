@@ -16,15 +16,14 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 
 type DispatchProps = typeof actions;
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Params {}
-interface LocationState { name:string }
-
-type Props = StateProps & DispatchProps & RouteComponentProps<Params, StaticContext, LocationState>;
-
 export interface State {
   todos: Todo[]
 }
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface Params {}
+export interface TodosLocationState { name:string }
+type Props = StateProps & DispatchProps & RouteComponentProps<Params, StaticContext, TodosLocationState>;
 
 class Todos extends React.Component<Props, State> {
   state = {
